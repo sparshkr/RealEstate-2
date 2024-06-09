@@ -83,6 +83,7 @@ export default function SellNFT() {
     //Upload data to IPFS
     try {
       const metadataURL = await uploadMetadataToIPFS();
+      console.log("Image URL:", metadataURL);
       if (metadataURL === -1) return;
       //After adding your Hardhat network to your metamask, this code will get providers and signers
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -98,7 +99,7 @@ export default function SellNFT() {
         Marketplace.abi,
         signer
       );
-
+      console.log("Contract: ", contract);
       //massage the params to be sent to the create NFT request
       const price = ethers.utils.parseUnits(formParams.price, "ether");
       let listingPrice = await contract.getListPrice();
